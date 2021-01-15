@@ -3,7 +3,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-csv_file = "../results_analysis/simulation.csv"
+csv_file = "../results/simulation.csv"
 
 headers = ["node count", "corrupted count", "corruption factor", "attack success", "duration"]
 data = pd.read_csv(csv_file, sep=";", names=headers)
@@ -21,18 +21,23 @@ data_511nodes = data[data["node count"] == 511]
 data_1023nodes = data[data["node count"] == 1023]
 data_2047nodes = data[data["node count"] == 2047]
 
-plt.plot(data_1nodes["corrupted count"], data_1nodes["attack success"], color="blue")
-plt.plot(data_3nodes["corrupted count"], data_3nodes["attack success"], color="red")
-plt.plot(data_7nodes["corrupted count"], data_7nodes["attack success"], color="green")
-plt.plot(data_15nodes["corrupted count"], data_15nodes["attack success"], color="gray")
-plt.plot(data_31nodes["corrupted count"], data_31nodes["attack success"], color="black")
-plt.plot(data_63nodes["corrupted count"], data_63nodes["attack success"], color="black")
-plt.plot(data_127nodes["corrupted count"], data_127nodes["attack success"], color="black")
-plt.plot(data_255nodes["corrupted count"], data_255nodes["attack success"], color="black")
-plt.plot(data_511nodes["corrupted count"], data_511nodes["attack success"], color="black")
-plt.plot(data_1023nodes["corrupted count"], data_1023nodes["attack success"], color="black")
-plt.plot(data_2047nodes["corrupted count"], data_2047nodes["attack success"], color="black")
+for index, row in data_511nodes.iterrows():
+    corrupted = row['corrupted count']
+    integrity = (100 - row['attack success']) / 100
+    print('( ' + str(corrupted) + ' , ' + str(integrity) + ' )')
 
-plt.plot(data_2047nodes["corrupted count"], [50] * len(data_2047nodes["corrupted count"]), color="black", linestyle="--")
+# plt.plot(data_1nodes["corrupted count"], data_1nodes["attack success"], color="blue")
+# plt.plot(data_3nodes["corrupted count"], data_3nodes["attack success"], color="red")
+# plt.plot(data_7nodes["corrupted count"], data_7nodes["attack success"], color="green")
+# plt.plot(data_15nodes["corrupted count"], data_15nodes["attack success"], color="gray")
+# plt.plot(data_31nodes["corrupted count"], data_31nodes["attack success"], color="black")
+# plt.plot(data_63nodes["corrupted count"], data_63nodes["attack success"], color="black")
+# plt.plot(data_127nodes["corrupted count"], data_127nodes["attack success"], color="black")
+# plt.plot(data_255nodes["corrupted count"], data_255nodes["attack success"], color="black")
+# plt.plot(data_511nodes["corrupted count"], data_511nodes["attack success"], color="black")
+# plt.plot(data_1023nodes["corrupted count"], data_1023nodes["attack success"], color="black")
+# plt.plot(data_2047nodes["corrupted count"], data_2047nodes["attack success"], color="black")
 
-plt.show()
+# plt.plot(data_2047nodes["corrupted count"], [50] * len(data_2047nodes["corrupted count"]), color="black", linestyle="--")
+
+# plt.show()
